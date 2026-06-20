@@ -1,0 +1,7 @@
+feedparser
+requests
+beautifulsoup4
+google-generativeai
+python-telegram-bot
+python-dotenv
+pytz

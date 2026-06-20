@@ -1,0 +1,17 @@
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Environment Variables (Contains Private Keys)
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor configurations
+.vscode/
+.idea/
