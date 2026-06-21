@@ -6,9 +6,17 @@ import pytz
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def fetch_sports_data():
-    """Fetches the FIFA World Cup scoreboard JSON from ESPN API."""
-    url = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"
+def fetch_sports_data(run_date=None):
+    """Fetches the FIFA World Cup scoreboard JSON from ESPN API for a date range around run_date."""
+    if run_date is None:
+        ist_tz = pytz.timezone("Asia/Kolkata")
+        run_date = datetime.now(ist_tz).date()
+        
+    yesterday = run_date - timedelta(days=1)
+    tomorrow = run_date + timedelta(days=1)
+    date_str = f"{yesterday.strftime('%Y%m%d')}-{tomorrow.strftime('%Y%m%d')}"
+    
+    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates={date_str}"
     try:
         response = requests.get(url, timeout=15)
         response.raise_for_status()
@@ -51,7 +59,10 @@ def process_world_cup_briefing(run_datetime_ist=None):
         ist_tz = pytz.timezone("Asia/Kolkata")
         run_datetime_ist = datetime.now(ist_tz)
     
-    data = fetch_sports_data()
+    run_date = run_datetime_ist.date()
+    tomorrow_date = (run_datetime_ist + timedelta(days=1)).date()
+    
+    data = fetch_sports_data(run_date)
     if not data or "events" not in data or not data["events"]:
         return {
             "has_data": False,
@@ -65,13 +76,17 @@ def process_world_cup_briefing(run_datetime_ist=None):
     subpart_c = []  # Upcoming today after 7:00 AM IST
     subpart_d = []  # Tomorrow's fixtures
     
-    run_date = run_datetime_ist.date()
-    tomorrow_date = (run_datetime_ist + timedelta(days=1)).date()
+    # Correctly handle pytz timezones (which require localize()) and standard tzinfo objects
+    tz = run_datetime_ist.tzinfo
+    naive_start = datetime.combine(run_date, datetime.min.time()) + timedelta(minutes=30)
+    naive_end = datetime.combine(run_date, datetime.min.time()) + timedelta(hours=7)
     
-    # 12:30 AM IST on run date
-    start_boundary = datetime.combine(run_date, datetime.min.time()).replace(tzinfo=run_datetime_ist.tzinfo) + timedelta(minutes=30)
-    # 7:00 AM IST on run date
-    end_boundary = datetime.combine(run_date, datetime.min.time()).replace(tzinfo=run_datetime_ist.tzinfo) + timedelta(hours=7)
+    if hasattr(tz, 'localize'):
+        start_boundary = tz.localize(naive_start)
+        end_boundary = tz.localize(naive_end)
+    else:
+        start_boundary = naive_start.replace(tzinfo=tz)
+        end_boundary = naive_end.replace(tzinfo=tz)
     
     for event in events:
         utc_time_str = event.get("date")

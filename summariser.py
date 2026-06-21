@@ -13,7 +13,7 @@ def _get_gemini_model(system_instruction):
         raise ValueError("GEMINI_API_KEY is not set.")
     genai.configure(api_key=api_key)
     return genai.GenerativeModel(
-        model_name="gemini-2.0-flash",
+        model_name="gemini-flash-latest",
         system_instruction=system_instruction
     )
 
