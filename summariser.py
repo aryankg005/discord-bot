@@ -31,6 +31,7 @@ def summarize_cybersecurity(articles):
         "into a clean daily briefing. Focus on key threats, vulnerabilities, and breaches "
         "disclosed in the last 24 hours. Organize the information logically with clear points. "
         "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content."
+        "summarise each topic into 2-4 sentences. use a modern free genz kind of language instead of tough english ones"
     )
     
     try:
@@ -119,7 +120,7 @@ def summarize_sports(sports_data):
         "3. Upcoming games today after 7:00 AM IST - use upcoming (📅) emoji.\n"
         "4. Tomorrow's fixtures - use upcoming (📅) emoji.\n\n"
         "Make sure to list scores and scorers (if available) for completed games. Keep the formatting extremely clear and clean. "
-        "Do not include any greeting or conversational filler. Start directly with the content."
+        "Do not include any greeting or conversational filler. Start directly with the content. for the upcoming matches, just predict on who will win in a fun way"
     )
     
     try:
@@ -178,6 +179,7 @@ def summarize_general_world(articles):
         "or war and active military conflicts (bombings, active battlefront reports, geopolitical troop movements), as those are covered in other sections. "
         "Keep the summaries clean, concise, and structured. "
         "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content."
+        "use humour and free lanugage wherever possible, use context , be serious about deaths or similar context"
     )
     
     try:
