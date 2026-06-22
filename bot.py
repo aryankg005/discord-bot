@@ -109,12 +109,18 @@ async def send_to_discord_async(cyber_summary, geo_summary, sports_summary, worl
     for chunk in chunks:
         try:
             loop = asyncio.get_event_loop()
-            await loop.run_in_executor(None, lambda c=chunk: requests.post(
-                webhook_url,
-                json={"content": c},
-                headers={"Content-Type": "application/json"},
-                timeout=10
-            ))
+            
+            def send_chunk(c):
+                response = requests.post(
+                    webhook_url,
+                    json={"content": c},
+                    headers={"Content-Type": "application/json"},
+                    timeout=10
+                )
+                response.raise_for_status()
+                return response
+
+            await loop.run_in_executor(None, send_chunk, chunk)
             logger.info("Discord Webhook message chunk sent successfully.")
         except Exception as e:
             logger.error(f"Failed to send message chunk to Discord Webhook: {e}")

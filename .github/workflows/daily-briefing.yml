@@ -2,8 +2,8 @@ name: Daily News Briefing
 
 on:
   schedule:
-    # Runs at 07:30 UTC (01:00 PM IST) every day
-    - cron: '30 7 * * *'
+    # Runs at 11:20 UTC (04:50 PM IST) every day to deliver by 05:00 PM IST
+    - cron: '20 11 * * *'
   workflow_dispatch:
     # Allows manual triggering of the workflow from the Actions tab
 
