@@ -70,7 +70,7 @@ def fetch_cybersecurity_news():
 def fetch_geopolitical_news():
     """Fetches articles from Geopolitical/War RSS feeds."""
     feeds = [
-        "https://feeds.reuters.com/reuters/worldNews",
+        "https://news.google.com/rss/search?q=site:reuters.com/world",
         "https://www.aljazeera.com/xml/rss/all.xml",
         "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
     ]
