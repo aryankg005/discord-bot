@@ -30,8 +30,8 @@ def summarize_cybersecurity(articles):
         "You are an expert cybersecurity analyst. Summarize the provided news stories "
         "into a clean daily briefing. Focus on key threats, vulnerabilities, and breaches "
         "disclosed in the last 24 hours. Organize the information logically with clear points. "
-        "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content."
-        "summarise each topic into 2-4 sentences. use a modern free genz kind of language instead of tough english ones"
+        "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content. "
+        "Summarise each topic into 2-4 sentences. Use a modern free genz kind of language instead of tough english ones."
     )
     
     try:
@@ -178,8 +178,8 @@ def summarize_general_world(articles):
         "CRITICAL CONSTRAINT: You must exclude any stories that are primarily about cybersecurity (hacking, data breaches, digital vulnerabilities) "
         "or war and active military conflicts (bombings, active battlefront reports, geopolitical troop movements), as those are covered in other sections. "
         "Keep the summaries clean, concise, and structured. "
-        "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content."
-        "use humour and free lanugage wherever possible, use context , be serious about deaths or similar context"
+        "Do not include any opening greetings, titles, or concluding remarks. Start directly with the content. "
+        "Use humour and free language wherever possible, use context, be serious about deaths or similar context."
     )
     
     try:
